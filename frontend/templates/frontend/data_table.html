@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
+    <style>
+        /* Add some CSS to position the user info in the top right corner */
+        .user-info {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            text-align: right;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- User Info Section -->
+    <div class="user-info">
+        <strong>{{ user_info.displayName }}</strong><br>
+        <span>{{ user_info.jobTitle }}</span>
+    </div>
+
+    <!-- Data Table Section -->
+    <h1>Data Table</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>H1</th>
+                <th>H2</th>
+                <th>H3</th>
+                <th>H4</th>
+                <th>H5</th>
+                <th>H6</th>
+                <th>Processed Flag</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.H1 }}</td>
+                <td>{{ item.H2 }}</td>
+                <td>{{ item.H3 }}</td>
+                <td>{{ item.H4 }}</td>
+                <td>{{ item.H5 }}</td>
+                <td>{{ item.H6 }}</td>
+                <td>{{ item.processed_flag }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

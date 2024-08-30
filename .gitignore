@@ -1,0 +1,24 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+myenv/
+
+# Django specific
+db.sqlite3
+*.log
+
+# VS Code specific
+.vscode/
+
+# Environment variables file
+.env
+
+# Static and media files
+static/
+media/
+
+# Ignore node_modules if using npm or Yarn
+node_modules/
