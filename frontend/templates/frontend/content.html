@@ -1,0 +1,49 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Data Table{% endblock %}
+
+{% block content %}
+    <!-- Filters Section -->
+    <div class="filters">
+        <input type="text" placeholder="Date" />
+        <select>
+            <option>Status</option>
+            <option>Report Generated</option>
+        </select>
+        <button>Search</button>
+        <button>Export</button>
+        <button>Submit</button>
+    </div>
+
+    <!-- ag-Grid Table -->
+    <div id="myGrid" class="ag-theme-alpine"></div>
+
+    {{ data|json_script:"data-json" }}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var rowData = JSON.parse(document.getElementById('data-json').textContent);
+
+    var columnDefs = [
+        { headerName: "Product", field: "H1", rowGroup: true },
+        { headerName: "Current PNL", field: "H2" },
+        { headerName: "Daily PNL Commentary", field: "H3" }
+    ];
+
+    var gridOptions = {
+        columnDefs: columnDefs,
+        rowData: rowData,
+        defaultColDef: {
+            sortable: true,
+            filter: true
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var eGridDiv = document.querySelector('#myGrid');
+        new agGrid.Grid(eGridDiv, gridOptions);
+    });
+</script>
+{% endblock %}

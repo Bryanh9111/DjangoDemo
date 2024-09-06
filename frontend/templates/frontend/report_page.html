@@ -1,0 +1,60 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}{{ report_name }}{% endblock %}
+
+{% block content %}
+    <!-- Title Bar -->
+    <div id="report-title" class="report-title">
+        <h2>{{ report_name }}</h2>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="filters">
+        <input type="text" placeholder="Date" />
+        <select>
+            <option>Status</option>
+            <option>Report Generated</option>
+        </select>
+        <button>Search</button>
+        <button>Export</button>
+        <button>Submit</button>
+    </div>
+
+    <!-- ag-Grid Table -->
+    <div id="myGrid" class="ag-theme-alpine" style="height: 500px; width: 100%;"></div>
+
+    <!-- Pass data safely to JavaScript -->
+    {{ data|json_script:"data-json" }}
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- Add ag-Grid JavaScript and CSS -->
+<link href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.noStyle.js"></script>
+
+<script>
+    // Initialize ag-Grid with data passed from Django
+    var rowData = JSON.parse(document.getElementById('data-json').textContent);
+
+    var columnDefs = [
+        { headerName: "Product", field: "H1", rowGroup: true },
+        { headerName: "Current PNL", field: "H2" },
+        { headerName: "Daily PNL Commentary", field: "H3" }
+    ];
+
+    var gridOptions = {
+        columnDefs: columnDefs,
+        rowData: rowData || [],  // Handle empty dataset
+        defaultColDef: {
+            sortable: true,
+            filter: true
+        }
+    };
+
+    var eGridDiv = document.querySelector('#myGrid');
+    new agGrid.Grid(eGridDiv, gridOptions);
+</script>
+{% endblock %}

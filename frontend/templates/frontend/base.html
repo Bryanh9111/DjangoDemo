@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Demo{% endblock %}</title>
+    
+    <!-- Load static tag -->
+    {% load static %}
+    
+    <!-- Link to static CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
+</head>
+<body>
+
+    <!-- Top Bar: Display user info in the top right corner -->
+    <div class="top-bar">
+        <div class="logo">
+            <img src="{% static 'images/company_logo.png' %}" alt="Company Logo" />
+        </div>
+        <div class="user-info">
+            Welcome, {{ user_info.displayName|default:"Guest" }} | {{ user_info.jobTitle|default:"User" }}
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Reports</h2>
+        <a href="{% url 'report_view' 'Oracle GL Vs OBS' %}" class="menu-item {% if report_name == 'Oracle GL Vs OBS' %}active{% endif %}">
+            Oracle GL Vs OBS
+        </a>
+        <a href="{% url 'report_view' 'OBS Actual Vs Flash' %}" class="menu-item {% if report_name == 'OBS Actual Vs Flash' %}active{% endif %}">
+            OBS Actual Vs Flash
+        </a>
+        <a href="{% url 'report_view' 'B2B Trade Reconciliation' %}" class="menu-item {% if report_name == 'B2B Trade Reconciliation' %}active{% endif %}">
+            B2B Trade Reconciliation
+        </a>
+        <h2>Views</h2>
+        <a href="#" class="menu-item">Mapping</a>
+        <a href="#" class="menu-item">Mapping Audit Trail</a>
+        <a href="#" class="menu-item">View Adjustments</a>
+        <h2>Access Control</h2>
+        <a href="#" class="menu-item">Access Management</a>
+        <h2>Help</h2>
+        <a href="#" class="menu-item">User Manual</a>
+    </div>
+
+    <!-- Main content will be injected here -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>
