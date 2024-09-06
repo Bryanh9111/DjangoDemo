@@ -1,3 +1,4 @@
+# Databricks notebook source
 from django.contrib import admin
 
-# Register your models here.
+# Register models here.
