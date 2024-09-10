@@ -10,5 +10,5 @@ urlpatterns = [
     path('', lambda request: redirect('report_view', report_name='Oracle GL Vs OBS'), name='home'),
     
     # Include the frontend app's URLs
-    path('report/', include('frontend.urls')),  # Ensure this points to the correct app
+    path('report/', include('frontend.urls')), 
 ]
