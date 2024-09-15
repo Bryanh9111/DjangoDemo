@@ -17,7 +17,6 @@ db.sqlite3
 .env
 
 # Static and media files
-static/
 media/
 
 # Ignore node_modules if using npm or Yarn
